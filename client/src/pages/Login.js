@@ -20,6 +20,7 @@ const Login = ({ role }) => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             navigate('/dashboard');
+            alert('Login successful!');
         } catch (err) {
             setError(err.response?.data?.error || 'Invalid credentials. Please try again.');
         }
@@ -46,7 +47,7 @@ const Login = ({ role }) => {
                         <input
                             type="password"
                             className="form-control"
-                            placeholder="••••••••"
+                            placeholder="........."
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
