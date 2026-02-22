@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const Companies = () => {
@@ -11,7 +11,7 @@ const Companies = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 
-    const fetchCompanies = async () => {
+    const fetchCompanies = useCallback(async () => {
         try {
             const res = await axios.get('https://mini-crm-xl4y.onrender.com/api/companies', {
                 headers: { Authorization: `Bearer ${token}` }
@@ -20,7 +20,7 @@ const Companies = () => {
         } catch (err) {
             console.error('Error fetching companies', err);
         }
-    };
+    }, [token]);
 
     const fetchCompanyDetail = async (id) => {
         try {
@@ -35,8 +35,7 @@ const Companies = () => {
 
     useEffect(() => {
         fetchCompanies();
-       
-    }, []);
+    }, [fetchCompanies]);
 
     const handleDelete = async (id, e) => {
         e.stopPropagation(); 

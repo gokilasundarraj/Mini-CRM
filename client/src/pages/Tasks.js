@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const Tasks = () => {
@@ -11,7 +11,7 @@ const Tasks = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 
-    const fetchTasks = async () => {
+    const fetchTasks = useCallback(async () => {
         try {
             const res = await axios.get('https://mini-crm-xl4y.onrender.com/api/tasks', {
                 headers: { Authorization: `Bearer ${token}` }
@@ -20,9 +20,9 @@ const Tasks = () => {
         } catch (err) {
             console.error('Error fetching tasks', err);
         }
-    };
+    }, [token]);
 
-    const fetchDependencies = async () => {
+    const fetchDependencies = useCallback(async () => {
         if (user.role !== 'admin') return;
         try {
             const [leadRes, empRes] = await Promise.all([
@@ -34,12 +34,12 @@ const Tasks = () => {
         } catch (err) {
             console.error('Error fetching dependencies', err);
         }
-    };
+    }, [token, user.role]);
 
     useEffect(() => {
         fetchTasks();
         fetchDependencies();
-    }, []);
+    }, [fetchTasks, fetchDependencies]);
 
     const handleCreate = async (e) => {
         e.preventDefault();

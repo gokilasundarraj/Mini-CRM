@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const Leads = () => {
@@ -15,7 +15,7 @@ const Leads = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 
-    const fetchLeads = async () => {
+    const fetchLeads = useCallback(async () => {
         try {
             const res = await axios.get(`https://mini-crm-xl4y.onrender.com/api/leads?search=${search}&status=${status}&page=${page}`, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -25,9 +25,9 @@ const Leads = () => {
         } catch (err) {
             console.error('Error fetching leads', err);
         }
-    };
+    }, [token, search, status, page]);
 
-    const fetchDependencies = async () => {
+    const fetchDependencies = useCallback(async () => {
         if (user.role !== 'admin') return;
         try {
             const [compRes, empRes] = await Promise.all([
@@ -39,16 +39,15 @@ const Leads = () => {
         } catch (err) {
             console.error('Error fetching dependencies', err);
         }
-    };
+    }, [token, user.role]);
 
     useEffect(() => {
         fetchLeads();
-       
-    }, [search, status, page]);
+    }, [fetchLeads]);
 
     useEffect(() => {
         fetchDependencies();
-    }, []);
+    }, [fetchDependencies]);
 
     const handleCreateOrUpdate = async (e) => {
         e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const Users = () => {
@@ -8,7 +8,7 @@ const Users = () => {
 
     const token = localStorage.getItem('token');
 
-    const fetchUsers = async () => {
+    const fetchUsers = useCallback(async () => {
         try {
             const res = await axios.get('https://mini-crm-xl4y.onrender.com/api/users', {
                 headers: { Authorization: `Bearer ${token}` }
@@ -17,11 +17,11 @@ const Users = () => {
         } catch (err) {
             console.error('Error fetching users', err);
         }
-    };
+    }, [token]);
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [fetchUsers]);
 
     const handleCreate = async (e) => {
         e.preventDefault();
