@@ -19,7 +19,7 @@ const Login = ({ role }) => {
             });
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            alert(response.data.message || 'Login successful!');
+            alert('login successful!');
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.error || 'Invalid credentials. Please try again.');
