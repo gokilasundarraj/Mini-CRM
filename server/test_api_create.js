@@ -2,8 +2,7 @@ const axios = require('axios');
 
 const testCreateUser = async () => {
     try {
-        // We need a token. I'll login first to get one. 
-        // Or I can use the JWT_SECRET to generate one, but it's easier to login.
+
         const loginRes = await axios.post('http://localhost:5000/api/auth/login', {
             email: 'admin@crm.com',
             password: 'adminpassword123',
