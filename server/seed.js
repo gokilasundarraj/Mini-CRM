@@ -11,8 +11,8 @@ const seed = async () => {
         if (!adminExists) {
             const admin = new User({
                 name: 'Super Admin',
-                email: 'admin@crm.com',
-                password: 'adminpassword123',
+                email: 'admin@gmail.com',
+                password: 'admin123',
                 role: 'admin'
             });
             try {
