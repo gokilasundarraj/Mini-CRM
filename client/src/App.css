@@ -1,4 +1,4 @@
-/* Global variables for Black & White theme */
+
 :root {
   --bg-color: #000000;
   --text-color: #ffffff;
@@ -24,7 +24,6 @@ body {
   line-height: 1.6;
 }
 
-/* Base styles */
 a {
   color: inherit;
   text-decoration: none;
@@ -37,7 +36,6 @@ button {
   transition: var(--transition);
 }
 
-/* Fade-in animation */
 .fade-in {
   animation: fadeIn 0.8s ease-out;
 }
@@ -54,7 +52,6 @@ button {
   }
 }
 
-/* Layout */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -142,7 +139,6 @@ button {
   margin: 0 auto;
 }
 
-/* Homepage Styles */
 .hero {
   height: 80vh;
   display: flex;
@@ -201,7 +197,6 @@ button {
   color: #000;
 }
 
-/* Sections */
 .section {
   padding: 100px 20px;
   border-top: 1px solid var(--border-color);
@@ -237,7 +232,6 @@ button {
   color: #888;
 }
 
-/* Forms */
 .form-container {
   max-width: 400px;
   margin: 100px auto;
@@ -286,7 +280,6 @@ select {
   border-color: #fff;
 }
 
-/* Fix autofill background color */
 .form-control:-webkit-autofill,
 .form-control:-webkit-autofill:hover,
 .form-control:-webkit-autofill:focus,
@@ -296,7 +289,6 @@ select {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* Modals */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -307,7 +299,6 @@ select {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  /* Better for scrolling */
   padding: 40px 20px;
   overflow-y: auto;
   z-index: 1000;
@@ -321,7 +312,6 @@ select {
   padding: 40px;
   position: relative;
   margin-bottom: 40px;
-  /* Space at bottom when scrolling */
 }
 
 .error-message {
@@ -330,7 +320,6 @@ select {
   margin-top: 5px;
 }
 
-/* Dashboard & Tables */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -385,7 +374,6 @@ td {
   border: 1px solid var(--border-color);
 }
 
-/* Footer */
 footer {
   padding: 50px 20px;
   text-align: center;
@@ -394,9 +382,6 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Responsive Design */
-
-/* Tablet & Smaller */
 @media (max-width: 1024px) {
   .hero h1 {
     font-size: 3rem;
@@ -411,7 +396,6 @@ footer {
   }
 }
 
-/* Small Tablet and Mobile */
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
@@ -456,7 +440,6 @@ footer {
     display: none;
   }
 
-  /* Robust Stacking for Page Headers */
   .fade-in>div:first-child[style*="display: flex"],
   .fade-in>div:first-child[style*="display:flex"] {
     flex-direction: column !important;
@@ -470,7 +453,6 @@ footer {
     width: 100%;
   }
 
-  /* Filters Row Stacking */
   .fade-in>div[style*="gap: 20px"],
   .fade-in>div[style*="gap:20px"] {
     flex-direction: column !important;
@@ -483,7 +465,6 @@ footer {
     max-width: 100% !important;
   }
 
-  /* Modal Fixes */
   .modal-overlay {
     padding: 20px 10px;
   }
@@ -503,7 +484,6 @@ footer {
   }
 }
 
-/* Specific Mobile Tweaks */
 @media (max-width: 480px) {
   .hero h1 {
     font-size: 1.8rem;
@@ -522,7 +502,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  /* Hide non-essential table cells on small mobile */
   th:nth-child(2),
   td:nth-child(2),
   th:nth-child(3),
