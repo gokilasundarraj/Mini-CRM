@@ -3,7 +3,6 @@ const router = express.Router();
 const Lead = require('../models/Lead');
 const { auth, adminOnly } = require('../middleware/auth');
 
-// Create Lead (Admin only)
 router.post('/', auth, adminOnly, async (req, res) => {
     try {
         const lead = new Lead(req.body);
@@ -14,7 +13,6 @@ router.post('/', auth, adminOnly, async (req, res) => {
     }
 });
 
-// List Leads (Search, Filter, Pagination)
 router.get('/', auth, async (req, res) => {
     try {
         const { search, status, page = 1, limit = 10 } = req.query;
@@ -27,8 +25,6 @@ router.get('/', auth, async (req, res) => {
             query.status = status;
         }
 
-        // Employee can only see assigned leads? 
-        // "Employee can: ... View assigned leads"
         if (req.user.role === 'employee') {
             query.assignedTo = req.user._id;
         }
@@ -52,7 +48,6 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// Update Lead (Admin only)
 router.patch('/:id', auth, adminOnly, async (req, res) => {
     try {
         const lead = await Lead.findOneAndUpdate({ _id: req.params.id, isDeleted: false }, req.body, { new: true, runValidators: true });
@@ -63,7 +58,6 @@ router.patch('/:id', auth, adminOnly, async (req, res) => {
     }
 });
 
-// Soft Delete Lead (Admin only)
 router.delete('/:id', auth, adminOnly, async (req, res) => {
     try {
         const lead = await Lead.findOneAndUpdate({ _id: req.params.id }, { isDeleted: true }, { new: true });

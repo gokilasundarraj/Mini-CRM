@@ -17,7 +17,7 @@ const Leads = () => {
 
     const fetchLeads = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/leads?search=${search}&status=${status}&page=${page}`, {
+            const res = await axios.get(`https://mini-crm-xl4y.onrender.com/api/leads?search=${search}&status=${status}&page=${page}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setLeads(res.data.leads);
@@ -31,8 +31,8 @@ const Leads = () => {
         if (user.role !== 'admin') return;
         try {
             const [compRes, empRes] = await Promise.all([
-                axios.get('http://localhost:5000/api/companies', { headers: { Authorization: `Bearer ${token}` } }),
-                axios.get('http://localhost:5000/api/users', { headers: { Authorization: `Bearer ${token}` } })
+                axios.get('https://mini-crm-xl4y.onrender.com/api/companies', { headers: { Authorization: `Bearer ${token}` } }),
+                axios.get('https://mini-crm-xl4y.onrender.com/api/users', { headers: { Authorization: `Bearer ${token}` } })
             ]);
             setCompanies(compRes.data);
             setEmployees(empRes.data);
@@ -43,23 +43,22 @@ const Leads = () => {
 
     useEffect(() => {
         fetchLeads();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+       
     }, [search, status, page]);
 
     useEffect(() => {
         fetchDependencies();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleCreateOrUpdate = async (e) => {
         e.preventDefault();
         try {
             if (currentLead._id) {
-                await axios.patch(`http://localhost:5000/api/leads/${currentLead._id}`, currentLead, {
+                await axios.patch(`https://mini-crm-xl4y.onrender.com/api/leads/${currentLead._id}`, currentLead, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
             } else {
-                await axios.post('http://localhost:5000/api/leads', currentLead, {
+                await axios.post('https://mini-crm-xl4y.onrender.com/api/leads', currentLead, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
             }
@@ -74,7 +73,7 @@ const Leads = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this lead?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/leads/${id}`, {
+            await axios.delete(`https://mini-crm-xl4y.onrender.com/api/leads/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchLeads();

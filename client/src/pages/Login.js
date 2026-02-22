@@ -12,7 +12,7 @@ const Login = ({ role }) => {
         e.preventDefault();
         setError('');
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', {
+            const response = await axios.post('https://mini-crm-xl4y.onrender.com/api/auth/login', {
                 email,
                 password,
                 role

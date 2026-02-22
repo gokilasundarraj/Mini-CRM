@@ -13,7 +13,7 @@ const Companies = () => {
 
     const fetchCompanies = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/companies', {
+            const res = await axios.get('https://mini-crm-xl4y.onrender.com/api/companies', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCompanies(res.data);
@@ -24,7 +24,7 @@ const Companies = () => {
 
     const fetchCompanyDetail = async (id) => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/companies/${id}`, {
+            const res = await axios.get(`https://mini-crm-xl4y.onrender.com/api/companies/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setSelectedCompany(res.data);
@@ -35,14 +35,14 @@ const Companies = () => {
 
     useEffect(() => {
         fetchCompanies();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+       
     }, []);
 
     const handleDelete = async (id, e) => {
-        e.stopPropagation(); // Prevent opening detail view
+        e.stopPropagation(); 
         if (!window.confirm('Are you sure you want to delete this company?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/companies/${id}`, {
+            await axios.delete(`https://mini-crm-xl4y.onrender.com/api/companies/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchCompanies();
@@ -54,7 +54,7 @@ const Companies = () => {
     const handleCreate = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/companies', { name, industry }, {
+            await axios.post('https://mini-crm-xl4y.onrender.com/api/companies', { name, industry }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setShowModal(false);

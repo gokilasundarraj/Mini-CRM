@@ -13,7 +13,7 @@ const Tasks = () => {
 
     const fetchTasks = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/tasks', {
+            const res = await axios.get('https://mini-crm-xl4y.onrender.com/api/tasks', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setTasks(res.data);
@@ -26,8 +26,8 @@ const Tasks = () => {
         if (user.role !== 'admin') return;
         try {
             const [leadRes, empRes] = await Promise.all([
-                axios.get('http://localhost:5000/api/leads?limit=100', { headers: { Authorization: `Bearer ${token}` } }),
-                axios.get('http://localhost:5000/api/users', { headers: { Authorization: `Bearer ${token}` } })
+                axios.get('https://mini-crm-xl4y.onrender.com/api/leads?limit=100', { headers: { Authorization: `Bearer ${token}` } }),
+                axios.get('https://mini-crm-xl4y.onrender.com/api/users', { headers: { Authorization: `Bearer ${token}` } })
             ]);
             setLeads(leadRes.data.leads);
             setEmployees(empRes.data);
@@ -39,13 +39,12 @@ const Tasks = () => {
     useEffect(() => {
         fetchTasks();
         fetchDependencies();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleCreate = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/tasks', newTask, {
+            await axios.post('https://mini-crm-xl4y.onrender.com/api/tasks', newTask, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setShowModal(false);
@@ -58,7 +57,7 @@ const Tasks = () => {
 
     const updateStatus = async (taskId, newStatus) => {
         try {
-            await axios.patch(`http://localhost:5000/api/tasks/${taskId}/status`, { status: newStatus }, {
+            await axios.patch(`https://mini-crm-xl4y.onrender.com/api/tasks/${taskId}/status`, { status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchTasks();
@@ -70,7 +69,7 @@ const Tasks = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this task?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+            await axios.delete(`https://mini-crm-xl4y.onrender.com/api/tasks/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchTasks();

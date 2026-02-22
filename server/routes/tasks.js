@@ -3,7 +3,6 @@ const router = express.Router();
 const Task = require('../models/Task');
 const { auth, adminOnly } = require('../middleware/auth');
 
-// Create Task (Admin only)
 router.post('/', auth, adminOnly, async (req, res) => {
     try {
         const task = new Task(req.body);
@@ -14,7 +13,6 @@ router.post('/', auth, adminOnly, async (req, res) => {
     }
 });
 
-// List Tasks (Role-based)
 router.get('/', auth, async (req, res) => {
     try {
         const query = {};
@@ -31,13 +29,11 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// Update Task Status
 router.patch('/:id/status', auth, async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
         if (!task) return res.status(404).send();
 
-        // If employee, check if they are assignedTo
         if (req.user.role === 'employee' && task.assignedTo.toString() !== req.user._id.toString()) {
             return res.status(403).send({ error: 'Forbidden. You can only update your assigned tasks.' });
         }
@@ -50,7 +46,6 @@ router.patch('/:id/status', auth, async (req, res) => {
     }
 });
 
-// Delete Task (Admin only)
 router.delete('/:id', auth, adminOnly, async (req, res) => {
     try {
         const task = await Task.findByIdAndDelete(req.params.id);

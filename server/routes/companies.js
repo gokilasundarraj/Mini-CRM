@@ -4,7 +4,6 @@ const Company = require('../models/Company');
 const Lead = require('../models/Lead');
 const { auth, adminOnly } = require('../middleware/auth');
 
-// Create Company (Admin only)
 router.post('/', auth, adminOnly, async (req, res) => {
     try {
         const company = new Company(req.body);
@@ -15,7 +14,6 @@ router.post('/', auth, adminOnly, async (req, res) => {
     }
 });
 
-// List Companies
 router.get('/', auth, async (req, res) => {
     try {
         const companies = await Company.find({});
@@ -25,7 +23,6 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// Get Company Detail with Leads
 router.get('/:id', auth, async (req, res) => {
     try {
         const company = await Company.findById(req.params.id);
@@ -38,7 +35,6 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
-// Delete Company (Admin only)
 router.delete('/:id', auth, adminOnly, async (req, res) => {
     try {
         const company = await Company.findByIdAndDelete(req.params.id);
