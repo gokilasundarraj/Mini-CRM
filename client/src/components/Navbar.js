@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <nav className="topbar" style={{ justifyContent: 'space-between', position: 'fixed', width: '100%', top: 0 }}>
-            <div style={{ fontWeight: 700, fontSize: '1.2rem', paddingLeft: '20px' }}>CRM PRO</div>
-            <div style={{ display: 'flex', gap: '30px', paddingRight: '20px' }}>
-                <Link to="/" className="nav-item-public">Home</Link>
-                <Link to="/about" className="nav-item-public">About</Link>
-                <Link to="/services" className="nav-item-public">Services</Link>
-                <Link to="/admin-login" className="btn btn-secondary" style={{ padding: '8px 20px' }}>Admin</Link>
-                <Link to="/employee-login" className="btn btn-primary" style={{ padding: '8px 20px' }}>Employee</Link>
+        <nav className="topbar">
+            <div className="logo">CRM PRO</div>
+
+            <button className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? '✕' : '☰'}
+            </button>
+
+            <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+                <Link to="/" className="nav-item-public" onClick={() => setIsOpen(false)}>Home</Link>
+                <Link to="/#about" className="nav-item-public" onClick={() => setIsOpen(false)}>About</Link>
+                <Link to="/#services" className="nav-item-public" onClick={() => setIsOpen(false)}>Services</Link>
+                <Link to="/admin-login" className="btn btn-secondary" style={{ padding: '8px 20px' }} onClick={() => setIsOpen(false)}>Admin</Link>
+                <Link to="/employee-login" className="btn btn-primary" style={{ padding: '8px 20px' }} onClick={() => setIsOpen(false)}>Employee</Link>
             </div>
         </nav>
     );
